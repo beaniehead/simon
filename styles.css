@@ -26,8 +26,8 @@ color:#fed;
 }
 
 #game{
-    width:700px;
-    height:700px;
+    width:500px;
+    height:500px;
     border-radius:50%;
     border:5px solid #333;
     background-color:#333;
@@ -64,6 +64,31 @@ color:#fed;
     letter-spacing: 3px;
     text-align: center;
 }
+
+#strictLight{
+    background-color: red;
+    filter:brightness(50%);
+    height: 10px;
+    width:10px;
+    border-radius: 50%;
+    display: block;
+}
+
+#strictButton{
+    border:1px solid gray;
+    background-color: gold;
+    height: 30px;
+    width:30px;
+    border-radius: 50%;
+}
+
+#strictButton:hover{
+    cursor: pointer;
+}
+#strictButton:focus{
+   outline-color:#333;
+}
+
 .gameButton{
     filter:brightness(70%);
 }

@@ -8,4 +8,4 @@
 
  - fcc version has a timer, and if player doesn't complete within a certain time, then error is shown and loops
 
- -delay after human player making last move - change
+ Done - delay after human player making last move - change
