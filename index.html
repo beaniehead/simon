@@ -9,6 +9,7 @@
     <script src="scripts.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
     <!-- Remove above if not used -->
     <link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
     <title>Simon Game</title>
@@ -17,7 +18,7 @@
 <body>
     <div id="main">
         <div id="title">
-            <h1>Simon</h1>
+            <h1>Simon Game</h1>
         </div>
         <div id="gameContainer">
             <div id="game" class="ai unstrict">
@@ -26,13 +27,45 @@
                 <div class="gameButton" id="yellowButton"></div>
                 <div class="gameButton" id="greenButton"></div>
                 <div id="console">
-
+                    <p id="gameTitle">Simon</p>
                     <button id="start" class="unstarted">Start</button>
-                    <div id="strictToggle"><span id="strictLight"></span><button id="strictButton" class="strictOff"></button></div>
-                    <div id="counter">00</div>
+                    <div id="strictToggle"><span id="strictLight"></span><button id="strictButton" class="strictOff"></button><span id="strictLabel">Strict</span></div>
+                    <span id="counterWrap"><div id="counter">00</div><span id="countLabel">Round</span>/<span id="roundTotal">20</span></span>
                     <button id="reset">Reset</button>
                 </div>
+                <div id="settingsPanel">
+                    <h3 id="settingsTitle">Settings</h3>
+                    <p id="settingsInfo">Use the +/- to change the number of rounds needed to win the game.<br/>(Max 40)</p>
+                    <span id="changeWin">
+                        <i id="minus" class="fa fa-minus" aria-hidden="true"></i>
+                        <h3 id="winValue">20</h3>
+                        <i id="plus" class="fa fa-plus" aria-hidden="true"></i>
+                    </span>
+                    <p id="closeSettings">Close</p>
+                </div>      
+                <div id="rules">
+                    <h3>RULES</h3>
+                    <ol>
+                        <li>The strict button toggles strict mode. In strict mode, one mistake starts the game over!
+                        </li>
+                        <li>Press Start. Simon will give the first signal. Repeat the signal by selecting the same color.</li>
+                        <li>Each turn Simon will add one more color to the sequence.</li>
+                        <li>Repeat the sequence to progress.Simon will repeat a sequence if you make a mistake.</li>
+                        <li>Complete all the rounds to win.</li>
+
+                    </ol>
+                    <span id="rulesFooter">The game gets faster the further you progress.</span><br/>
+                    <p id="closeRules">Close</p>
+
+                </div>
+                <div id="win">You Win!</div>
+                <div id="lose">You Lose.</div>
             </div>
+        </div>
+        <div id="footer">
+            <i id="settings" class="fa fa-cog" aria-hidden="true"></i>
+            <i id="openRules" class="fa fa-info" aria-hidden="true"></i>
+
         </div>
     </div>
 </body>
