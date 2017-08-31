@@ -111,6 +111,13 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
             humanArray.push(colors.indexOf(humanChosenColor)); //pushes the array index from colors array of the clicked button
             if (humanArray[clicks] == aiArray[clicks]) { //checks if the clicked button matches the ai button at the same point in thee sequence - based on current click count
                 sounds[humanChosenColor].play(); //plays the corresponding sound for the clicked button
+                if (humanArray.length < aiArray.length && aiArray[clicks] == aiArray[clicks+1]){
+                    $("#game").removeClass("human")
+                    setTimeout(function(){
+                        $("#game").addClass("human");
+                    },650);
+                }
+                
                 if (humanArray.length === aiArray.length) {
                     //determines whether the human player has completed the end of the ai sequence
                     if (humanArray.length == winValue) {//if length = 20 then player has won
