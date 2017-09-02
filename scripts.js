@@ -30,17 +30,17 @@ $(document).ready(function () {
     var q = 0;
     var winValue = Number($("#winValue").html()); //value for number of rounds to win the game
 
-if(document.body.clientWidth<550){ // adjusting game size for smaller screens
-    
-    $("#game").css({"width":"400px","height":"400px"})
-    $("#rules, li").css({"font-size":"0.9em"});
-    $("#rulesFooter").css("font-size","0.8em");
-    
-    $("#closeRulse").css({"font-size":"0.8em","margin-top":"0"});
-    $("#settingsInfo").css("font-size","0.8em");
-    $("#closeSettings").css("margin-top","0");
-    
-}
+    if (document.body.clientWidth < 550) { // adjusting game size for smaller screens
+
+        $("#game").css({ "width": "400px", "height": "400px" })
+        $("#rules, li").css({ "font-size": "0.9em" });
+        $("#rulesFooter").css("font-size", "0.8em");
+
+        $("#closeRulse").css({ "font-size": "0.8em", "margin-top": "0" });
+        $("#settingsInfo").css("font-size", "0.8em");
+        $("#closeSettings").css("margin-top", "0");
+
+    }
 
     $("#counter").html("0" + round);
     var clicks = 0; //counter 
@@ -89,7 +89,7 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
     //starts the ai sequence by clicking the start buttons
     $("#start").click(function () {
         if ($("#start").hasClass("unstarted")) {//checks to see if the start button has unstarted class
-            $("#start").css("filter","brightness(100%");
+            $("#start").css("filter", "brightness(100%");
             $("#settings").css({ "z-index": "-1", "opacity": "0" });//hide the panel showings settings and rules
             $("#openRules").css({ "z-index": "-1", "opacity": "0" });//hide the panel showings settings and rules
             $("#start").toggleClass("unstarted started") //alternates the class of the button  to started to prevent the button being clicked more than once in a game
@@ -100,7 +100,7 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
         }
     })
     //user controls to copy sequence
-    $(".gameButton").click(function () {
+    $(".gameButton").mousedown(function () {
         var clickedButton = this;
         if ($("#game").hasClass("human")) { //checks that it is human player's turn - to prevent clicking and playback during ai sequence
             $(clickedButton).css("filter", "brightness(100%)");// increased brightness to highlight selected button
@@ -110,31 +110,32 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
             var humanChosenColor = $(clickedButton).attr("id"); //retrieves the id of the clicked button
             humanArray.push(colors.indexOf(humanChosenColor)); //pushes the array index from colors array of the clicked button
             if (humanArray[clicks] == aiArray[clicks]) { //checks if the clicked button matches the ai button at the same point in thee sequence - based on current click count
+                //sounds[humanChosenColor].loop = true; //used to loop sounds until mouseclick ends - doesn't work with sounds that aren't continuous tones with no fades
                 sounds[humanChosenColor].play(); //plays the corresponding sound for the clicked button
-                if (humanArray.length < aiArray.length && aiArray[clicks] == aiArray[clicks+1]){
+                if (humanArray.length < aiArray.length && aiArray[clicks] == aiArray[clicks + 1]) {
                     $("#game").removeClass("human")
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#game").addClass("human");
-                    },650);
+                    }, 650);
                 }
-                
+                // if decided to implement a looping audio track, then the below shouldn't start until mouseup - see *** for end of block. will also need to add stop audio line.
                 if (humanArray.length === aiArray.length) {
                     //determines whether the human player has completed the end of the ai sequence
                     if (humanArray.length == winValue) {//if length = 20 then player has won
                         if ($("#game").hasClass("unstrict")) { //plays unstrict mode music
                             sounds["unstrictWin"].play();
-                            $("#win").css({"z-index":"4","opacity":"0.9"});
-                            setTimeout(function(){
-                                $("#win").css({"z-index":"-1","opacity":"0"});
-                            },4000);
+                            $("#win").css({ "z-index": "4", "opacity": "0.9" });
+                            setTimeout(function () {
+                                $("#win").css({ "z-index": "-1", "opacity": "0" });
+                            }, 4000);
                             reset();
                             return;
                         } else if ($("#game").hasClass("strict")) { //plays win sound for strict mode
                             sounds["strictWin"].play();
-                            $("#win").css({"z-index":"4","opacity":"0.9"});
-                            setTimeout(function(){
-                                $("#win").css({"z-index":"-1","opacity":"0"});
-                            },4000);
+                            $("#win").css({ "z-index": "4", "opacity": "0.9" });
+                            setTimeout(function () {
+                                $("#win").css({ "z-index": "-1", "opacity": "0" });
+                            }, 4000);
                             reset();
                             return;
                         }
@@ -152,6 +153,8 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
                         addIndex(); //initiates next ai turn
                     }, (speed * 1.7));
                 }
+                //***
+
             } else { //if human player doesn't match ai sequence
                 $("#counter").html("!!").css("color", "red");
                 if ($("#game").hasClass("unstrict")) {
@@ -167,10 +170,10 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
                     }, 2800);
                 } else if ($("#game").hasClass("strict")) {
                     sounds["gameOver"].play(); //plays the corresponding sound for the clicked button
-                    $("#lose").css({"z-index":"4","opacity":"0.9"});
-                    setTimeout(function(){
-                        $("#lose").css({"z-index":"-1","opacity":"0"});
-                    },4000);
+                    $("#lose").css({ "z-index": "4", "opacity": "0.9" });
+                    setTimeout(function () {
+                        $("#lose").css({ "z-index": "-1", "opacity": "0" });
+                    }, 4000);
                     setTimeout(function () {
                         reset();
                     }, 2800);
@@ -226,7 +229,7 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
             var roundValue = Number($("#winValue").html());
             $("#winValue").html(roundValue - increase);
             winValue = Number($("#winValue").html());
-            
+
             $("#roundTotal").html(winValue);
         }
     })
@@ -263,8 +266,8 @@ if(document.body.clientWidth<550){ // adjusting game size for smaller screens
             $("#counter").css("color", "#def");//counter will always display as two digits
             $("#settings").css({ "z-index": "1", "opacity": "1" });//show the button showings settings and rules
             $("#openRules").css({ "z-index": "1", "opacity": "1" });//show the button showings settings and rules
-            
-            $("#start").css("filter","brightness(80%");
+
+            $("#start").css("filter", "brightness(80%");
         }
     }
 
